@@ -1,0 +1,61 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationService
+
+<PageTitle>BlazorExceptionApp</PageTitle>
+
+<MBDrawer @ref="@pDrawer"
+          IsDismissible="true">
+
+    <nav class="mdc-list">
+        <MBListItem LeadingIcon="home" Label="Home" @onclick="@(() => ListItemClickHandler(""))" />
+        <MBListItem LeadingIcon="table_chart" Label="Dashboard" @onclick="@(() => ListItemClickHandler("dashboard"))" />
+    </nav>
+</MBDrawer>
+
+<div class="mdc-drawer-app-content">
+    <MBTopAppBar Title="Blazor Exception App"
+                 @onclick="@SideBarToggle"
+                 NavIcon="menu"
+                 ScrollTarget="#main-content"
+                 TopAppBarType="@MBTopAppBarType.Dense"
+                 class="app-bar mdc-top-app-bar--short-has-action-item mdc-elevation--z5">
+    </MBTopAppBar>
+
+    <main class="main-content" id="main-content">
+        <div class="max-width-content">
+            <CascadingValue Name="CascadingDefaults" Value="@pCascadingDefaults" IsFixed="true">
+                <div class="mdc-top-app-bar--dense-fixed-adjust">
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            @Body
+                        </div>
+                    </div>
+                </div>
+            </CascadingValue>
+        </div>
+    </main>
+
+</div>
+
+
+    @code {
+    private MBDrawer pDrawer { get; set; }
+
+    private MBCascadingDefaults pCascadingDefaults { get; set; } = new()
+        {
+            ConstrainSplattableAttributes = true,
+            TouchTarget = false
+        };
+
+    private void ListItemClickHandler(string NavigationReference)
+    {
+        pDrawer.NotifyNavigation();
+        NavigationService.NavigateTo(NavigationReference);
+    }
+
+    private void SideBarToggle()
+    {
+        pDrawer.Toggle();
+    }
+
+    }

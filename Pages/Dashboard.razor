@@ -1,0 +1,22 @@
+﻿@page "/Dashboard"
+
+<h3>Dashboard</h3>
+
+<div class="mdc-layout-grid__cell--span-12">
+    <MBCard AutoStyled="true">
+        <Primary>
+            <h2 class="mb-card__title mdc-typography mdc-typography--headline6">
+                Sorted, Grouped grid hiding the grouping column with group list
+            </h2>
+
+            <MBGrid ColumnConfigurations="@ColumnConfigurations"
+                    GroupedOrderedData=@PeopleAsGroupedDataWithGroupList
+                    Group="true"
+                    HighlightSelectedRow="@true"
+                    KeyExpression="@(PeopleAsDictionary => PeopleAsDictionary.UniqueIdentifier.ToString())"
+                    Measurement="@MB_Grid_Measurement.Percent"
+                    OnMouseClick="@MBGridRowClicked"
+                    TRowData="@Person" />
+        </Primary>
+    </MBCard>
+</div>
