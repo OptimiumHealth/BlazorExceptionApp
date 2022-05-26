@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Material.Blazor" Version="2.0.0-preview.8" />
+    <PackageReference Include="Material.Blazor" Version="3.0.0-preview.2" />
   </ItemGroup>
 
 </Project>
